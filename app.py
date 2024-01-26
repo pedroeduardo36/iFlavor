@@ -1,6 +1,6 @@
 import os
 
-restaurantes = [{'nome':'Bananas bananas, amigos a parte', 'categoria':'Fusion', 'ativo':True},
+restaurantes = [{'nome':'Amigos amigos, bananas a parte', 'categoria':'Fusion', 'ativo':True},
                 {'nome':'Santé13', 'categoria':'Bistro', 'ativo':False},
                 {'nome':'Ma che pasta', 'categoria':'Italiano', 'ativo':False}]
 
@@ -11,6 +11,7 @@ def exibir_nome_app():
         ''')
 
 def exibir_opcoes():
+    '''Essa função é responsável por: exibir as opções no menu '''
     print('1. Cadastrar restaurante')
     print('2. Listar restaurante')
     print('3. Ativar restaurante')
@@ -35,6 +36,7 @@ def opcao_invalida():
     voltar_menu_principal()
 
 def cadastrar_novo_restaurante():
+    '''Essa função é responsável por: Cadastrar novos restaurantes'''
     exibir_subtitulo('Cadastro de novos restaurantes')
     nome_do_restaurante = input('\nDigite o nome do restaurante que deseja cadastrar\n')
     categoria = input(f'\nDigite o nome da categoria do restaurante {nome_do_restaurante}: \n')
@@ -49,15 +51,16 @@ def cadastrar_novo_restaurante():
 def listar_restaurantes():
     exibir_subtitulo('Lista dos restaurantes')
 
+    print(f"{'Nome do restaurante'.ljust(33)} | {'Categoria'.ljust(30)} | Status")
     for restaurante in restaurantes:
         nome_restaurante = restaurante['nome']
         categoria = restaurante['categoria']
-        ativo = restaurante['ativo']
-        print(f'\n -> {nome_restaurante} | {categoria} | {ativo}\n')
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
+        print(f'-> {nome_restaurante.ljust(30)} | {categoria.ljust(30)} | {ativo}\n')
         
     voltar_menu_principal()
 
-def alternar_estado_do_restaurante():
+def ativando_restaurante():
     exibir_subtitulo('Alternar estado do restaurante')
     nome_restaurante = input('\nDigite o nome do restaurante que deseja alterar o estado: \n')
     restaurante_encontrado = False
@@ -86,7 +89,7 @@ def escolher_opcao():
             case 2:
                 listar_restaurantes()
             case 3:
-                alternar_estado_do_restaurante()
+                ativando_restaurante()
             case 4:
                 finalizar_app()
             case _:
